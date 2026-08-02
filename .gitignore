@@ -1,0 +1,19 @@
+# Large data/model artefacts are intentionally not versioned here — see
+# README.md "Data & model availability" for sources and regeneration steps.
+data_raw/
+data_processed/
+models/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
