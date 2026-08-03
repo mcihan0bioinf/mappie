@@ -6,7 +6,7 @@ Code accompanying the manuscript:
 > discovery**
 
 MAPPIE (Map of Protein–Protein Interaction Embeddings) is a deep learning framework that learns an interaction-level latent space from protein sequence embeddings. Each PPI is represented by combining the ESM-2 embeddings of its two partners and projecting them through an autoencoder into a compact latent vector. 
-In the resulting map, a PPI's local neighborhood reflects shared functional properties independent of network topology. Functional context is inferred by enrichment analysis over neighboring interactions, spanning Gene Ontology terms, pathways, and domain annotations. Candidate or newly predicted PPIs can be projected into the space and annotated from their nearest neighbors, enabling interaction-level function inference without relying on direct network connectivity.
+In the resulting map, a PPI's local neighborhood reflects shared functional properties independent of network topology. Functional context is inferred by enrichment analysis over neighboring interactions. Candidate or newly predicted PPIs can be projected into the space and annotated from their nearest neighbors, enabling interaction-level function inference without relying on direct network connectivity.
 
 The MAPPIE web server is freely available at [http://cbdm-01.zdv.uni-mainz.de/~mcihan/mappie/](https://cbdm-01.zdv.uni-mainz.de/~mcihan/mappie/). 
 ## Layout
