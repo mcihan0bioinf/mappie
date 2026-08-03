@@ -4,11 +4,8 @@ Code accompanying the manuscript:
 
 > **A map of human protein-protein interactions embeddings for functional
 > discovery**
-> 
-> Mert Cihan, Ute Distler, Miguel A. Andrade-Navarro (preprint coming)
 
-MAPPIE (Map of Protein–Protein Interaction Embeddings) is a deep learning framework that learns an interaction-level latent space from protein sequence embeddings. Each PPI is represented by combining the ESM-2 embeddings of its two partners and projecting them through an autoencoder into a compact latent vector. Trained on 199,137 experimentally supported PPIs, the model is tuned so that interactions sharing domain–domain interaction (DDI) annotations land close together, producing biologically coherent neighborhoods. DDI annotations guide only the training and evaluation so MAPPIE generalizes to interactions without domain annotation.
-
+MAPPIE (Map of Protein–Protein Interaction Embeddings) is a deep learning framework that learns an interaction-level latent space from protein sequence embeddings. Each PPI is represented by combining the ESM-2 embeddings of its two partners and projecting them through an autoencoder into a compact latent vector. 
 In the resulting map, a PPI's local neighborhood reflects shared functional properties independent of network topology. Functional context is inferred by enrichment analysis over neighboring interactions, spanning Gene Ontology terms, pathways, and domain annotations. Candidate or newly predicted PPIs can be projected into the space and annotated from their nearest neighbors, enabling interaction-level function inference without relying on direct network connectivity.
 
 The MAPPIE web server is freely available at [http://cbdm-01.zdv.uni-mainz.de/~mcihan/mappie/](https://cbdm-01.zdv.uni-mainz.de/~mcihan/mappie/). 
@@ -64,10 +61,9 @@ back to a small relative default (e.g. `data/hippie/hippie_current.txt`,
 The variable name and default for each script are near the top of the
 file (`os.environ.get("...", "...")`).
 
-## License
-
-MIT (see `LICENSE`).
+If you use MAPPIE in your work, please cite:
+> **A map of human protein-protein interactions embeddings for functional
+> discovery** Mert Cihan, Ute Distler, Miguel A. Andrade Navarro (TBD)
 
 ## Contact
-
-Mert Cihan — mcihan.bioinf@gmail.com
+For questions, feedback or problems please contact mcihan.bioinf@gmail.com.
