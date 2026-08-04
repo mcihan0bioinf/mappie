@@ -1,4 +1,6 @@
 # MAPPIE — Map of Protein-Protein Interaction Embeddings
+<img width="313.9" height="92" alt="mappie" src="https://github.com/user-attachments/assets/c8d33f1e-ec31-4d1d-9b1d-9942b7d6afe5" />
+
 
 Code accompanying the manuscript:
 
