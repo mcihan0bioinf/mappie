@@ -32,10 +32,6 @@ KEGG_HSA_PATHWAY_LINKS = os.environ.get("KEGG_HSA_PATHWAY_LINKS", "data/kegg/keg
 THREEDID_DOMAIN_PAIRS_CSV = os.environ.get("THREEDID_DOMAIN_PAIRS_CSV", "data/3did/3did_domain_pairs_with_pfam.csv")
 OUTPUT_CSV = os.environ.get("PPI_ANNOTATION_CSV", "data_processed/uniprot/ppi_annotation_long_ddi.csv")
 
-GO_EVIDENCE_CODES = {
-    "EXP", "IDA", "IPI", "IMP", "IGI", "IEP",  # experimental
-    "HTP", "HDA", "HMP", "HGI", "HEP",         # high-throughput
-}
 GO_ASPECT_TO_TERM_TYPE = {"P": "GO_BP", "F": "GO_MF", "C": "GO_CC"}
 _GO_ID_RE = re.compile(r"^id: (GO:\d+)")
 _GO_NAME_RE = re.compile(r"^name: (.+)")
@@ -77,7 +73,7 @@ def fetch_uniprot_xrefs(hippie_path: str, output_tsv: str) -> None:
 
 
 def parse_gaf(gaf_path: str) -> dict[str, set[tuple[str, str]]]:
-    """UniProt accession -> {(term_type, go_id), ...}, evidence-code filtered."""
+    """UniProt accession -> {(term_type, go_id), ...}, all evidence codes."""
     protein_terms: dict[str, set[tuple[str, str]]] = defaultdict(set)
     with open(gaf_path) as f:
         for line in f:
@@ -86,9 +82,7 @@ def parse_gaf(gaf_path: str) -> dict[str, set[tuple[str, str]]]:
             parts = line.rstrip("\n").split("\t")
             if len(parts) < 9:
                 continue
-            acc, go_id, evidence, aspect = parts[1], parts[4], parts[6], parts[8]
-            if evidence not in GO_EVIDENCE_CODES:
-                continue
+            acc, go_id, aspect = parts[1], parts[4], parts[8]
             term_type = GO_ASPECT_TO_TERM_TYPE.get(aspect)
             if not term_type:
                 continue
