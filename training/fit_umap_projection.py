@@ -13,7 +13,7 @@ base_dir = os.path.join(os.environ.get("MAPPIE_TRAINING_BASE", "data"), "optimiz
 output_dir = os.path.join(base_dir, "umap")
 os.makedirs(output_dir, exist_ok=True)
 
-# For 80k points
+# For the full 199,137-PPI reference set
 neighbors_list = [30, 50, 100]   # keep 50 as final
 min_dist = 0.1
 n_components = 2
@@ -64,4 +64,4 @@ for n in neighbors_list:
     print(f"   Saved: {out_csv}")
     print(f"   Saved: {out_model}")
 
-print("\nUMAP COMPLETE for 80k-point latent space.")
+print("\nUMAP COMPLETE for the full 199,137-PPI reference latent space.")

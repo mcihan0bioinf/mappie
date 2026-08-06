@@ -17,7 +17,7 @@ K_NEIGHBOURS = int(os.environ.get("K_NEIGHBOURS", "100"))
 ADJ_P = float(os.environ.get("ADJ_P", "0.05"))
 ANNOTATION_DB = os.environ.get("MAPPIE_ANNOTATION_DB", "../../mappie/data_processed/uniprot/ppi_annotation_long_ddi.db")
 LATENT_INDEX_NPZ = os.environ.get("MAPPIE_LATENT_INDEX", "../../mappie/data_processed/latent_index.npz")
-MAPPIE_REPO_ROOT = os.environ.get("MAPPIE_ROOT", "../../mappie")
+MAPPIE_REPO_ROOT = os.environ.get("MAPPIE_REPO_ROOT", str(Path(__file__).resolve().parents[1]))
 RESULTS_DIR = Path(os.environ.get("RESULTS_DIR", str(ROOT / "results")))
 LOGS_DIR = Path(os.environ.get("LOGS_DIR", str(ROOT / "logs")))
 
@@ -83,8 +83,8 @@ def project_and_enrich(both_dark: pd.DataFrame):
     mappie_root = str(Path(MAPPIE_REPO_ROOT).resolve())
     if mappie_root not in sys.path:
         sys.path.insert(0, mappie_root)
-    from scripts import new_ppi_callable as npc
-    from scripts.run_enrichment import run_enrichment_db, bh_adjust
+    from core_algorithm import project_ppi as npc
+    from core_algorithm.run_enrichment import run_enrichment_db, bh_adjust
 
     print("[project_and_enrich] loading MAPPIE models (ESM-2 650M, scaler, autoencoder, UMAP)...")
     t0 = time.time()
@@ -99,7 +99,7 @@ def project_and_enrich(both_dark: pd.DataFrame):
     ok_mask = np.zeros(len(pairs), dtype=bool)
     for i, row in pairs.iterrows():
         try:
-            _, _, latent = npc.new_ppi_callable(row["uniprotA"], row["uniprotB"], input_type="uniprot")
+            _, _, latent = npc.project_ppi(row["uniprotA"], row["uniprotB"], input_type="uniprot")
             latents[i] = np.array(latent, dtype=np.float32)
             ok_mask[i] = True
         except Exception as exc:

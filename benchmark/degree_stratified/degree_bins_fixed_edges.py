@@ -5,7 +5,7 @@ degree p_h, one evaluation each (no k sweep).
 
 Run once per HIPPIE_MODE:
   mappie_universe     -- HIPPIE restricted to proteins MAPPIE embeds
-  mappie_interactions -- HIPPIE restricted to score > 0.64
+  mappie_interactions -- HIPPIE restricted to score >= 0.64
 
 Usage: degree_bins_fixed_edges.py <HIPPIE_MODE> <N_PER_BIN>
   e.g. degree_bins_fixed_edges.py mappie_universe 500
@@ -163,7 +163,7 @@ hippie_raw = hippie_raw[hippie_raw["prot1"].apply(lambda x: isinstance(x, str)) 
 if HIPPIE_MODE == "mappie_universe":
     hippie_raw = hippie_raw[hippie_raw["prot1"].isin(mappie_proteins) & hippie_raw["prot2"].isin(mappie_proteins)]
 elif HIPPIE_MODE == "mappie_interactions":
-    hippie_raw = hippie_raw[hippie_raw["score"] > 0.64]
+    hippie_raw = hippie_raw[hippie_raw["score"] >= 0.64]
 elif HIPPIE_MODE != "full":
     raise ValueError(f"Unknown HIPPIE_MODE: {HIPPIE_MODE!r}")
 hippie_adj: dict[str, list[tuple[str, float]]] = defaultdict(list)

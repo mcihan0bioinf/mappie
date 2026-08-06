@@ -15,8 +15,8 @@ import warnings
 warnings.filterwarnings("ignore")
 from sklearn.neighbors import NearestNeighbors
 
-sys.path.insert(0, str(Path(os.environ.get("MAPPIE_ROOT", "../mappie"))))
-from scripts.run_enrichment import run_enrichment_db, bh_adjust
+sys.path.insert(0, str(Path(os.environ.get("MAPPIE_REPO_ROOT", Path(__file__).resolve().parents[2]))))
+from core_algorithm.run_enrichment import run_enrichment_db, bh_adjust
 
 FCG_FILE = Path(os.environ.get("CORUM_FCG_TXT", str(Path(__file__).parent / "data/corum_fcg.txt")))
 LATENT_FILE  = Path(os.environ.get("MAPPIE_LATENT_INDEX", "../mappie/data_processed/latent_index.npz"))

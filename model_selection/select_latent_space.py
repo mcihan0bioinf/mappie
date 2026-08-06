@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ranks candidate latent spaces by proportion of DDIs with contrast < 1
 (from compute_ddi_density_matrix.py), highlighting the selected config
-(ESM-2, multiply, 128-d, >0.64 filter). Behind Supp. Fig. 1."""
+(ESM-2, multiply, 128-d, >=0.64 filter). Behind Supp. Fig. 1."""
 import os
 from pathlib import Path
 
@@ -9,7 +9,7 @@ import pandas as pd
 
 DENSITY_MATRIX_CSV = os.environ.get("DDI_DENSITY_MATRIX_CSV", "results/ddi_density_matrix.csv")
 SELECTED_CONFIG = "esm_multiply_ld128_064_latent.csv"
-FILTER_TIER = "064"  # HIPPIE > 0.64; the tier scored consistently across all candidates
+FILTER_TIER = "064"  # HIPPIE >= 0.64; the tier scored consistently across all candidates
 
 
 def main():

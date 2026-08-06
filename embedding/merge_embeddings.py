@@ -4,7 +4,7 @@ vector per op, written to combine_embeddings/combinations/{source}_{merge}.pkl
 for train_autoencoder.py. `multiply` is the op actually used at inference;
 the rest exist for the model_selection/ grid search that picked it.
 
-Filters HIPPIE to score > HIPPIE_SCORE_THRESH (default 0.64, the primary
+Filters HIPPIE to score >= HIPPIE_SCORE_THRESH (default 0.64, the primary
 reference set: 199,137 PPIs / 15,503 proteins) before merging, and writes
 hippie_pairs_064.csv / hippie_pairs_top10.csv (>=0.82, the top-10% comparison
 subset) for train_autoencoder.py's confidence-filter grid."""
@@ -50,9 +50,9 @@ def load_embedding(protein_id: str, cache: dict) -> np.ndarray | None:
 
 def main():
     df = pd.read_csv(HIPPIE_FILE, sep="\t", header=None, names=["p1", "id1", "p2", "id2", "score", "info"])
-    df = df[df["score"] > HIPPIE_SCORE_THRESH].reset_index(drop=True)
+    df = df[df["score"] >= HIPPIE_SCORE_THRESH].reset_index(drop=True)
     pairs = list(zip(df["p1"], df["p2"]))
-    print(f"HIPPIE score > {HIPPIE_SCORE_THRESH}: {len(pairs):,} PPIs")
+    print(f"HIPPIE score >= {HIPPIE_SCORE_THRESH}: {len(pairs):,} PPIs")
 
     FILTER_LIST_DIR.mkdir(parents=True, exist_ok=True)
     keys = [f"{a}_{b}" for a, b in pairs]
