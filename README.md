@@ -4,7 +4,7 @@
 
 Code accompanying the manuscript:
 
-> **A map of human protein-protein interactions embeddings for functional
+> **A map of human protein-protein interaction embeddings for functional
 > discovery**
 
 MAPPIE (Map of Protein–Protein Interaction Embeddings) is a deep learning framework that learns an interaction-level latent space from protein sequence embeddings. Each PPI is represented by combining the ESM-2 embeddings of its two partners and projecting them through an autoencoder into a compact latent vector. 
