@@ -64,7 +64,7 @@ The variable name and default for each script are near the top of the
 file (`os.environ.get("...", "...")`).
 
 If you use MAPPIE in your work, please cite:
-> **A map of human protein-protein interactions embeddings for functional
+> **A map of human protein-protein interaction embeddings for functional
 > discovery** Mert Cihan, Ute Distler, Miguel A. Andrade Navarro (TBD)
 
 ## Contact
