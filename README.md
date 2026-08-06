@@ -65,7 +65,7 @@ file (`os.environ.get("...", "...")`).
 
 If you use MAPPIE in your work, please cite:
 > **A map of human protein-protein interaction embeddings for functional
-> discovery** Mert Cihan, Ute Distler, Miguel A. Andrade Navarro (TBD)
+> discovery** Mert Cihan, Ute Distler, Miguel A. Andrade-Navarro (doi: TBD)
 
 ## Contact
 For questions, feedback or problems please contact mcihan.bioinf@gmail.com.
