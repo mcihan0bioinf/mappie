@@ -53,23 +53,32 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 
+HIDDEN_SIZES = [512, 256]
+
+
 class Autoencoder(nn.Module):
     def __init__(self, input_dim, latent_dim):
         super().__init__()
-        self.encoder = nn.Sequential(
-            nn.Linear(input_dim, 512),
-            nn.ReLU(),
-            nn.Linear(512, 256),
-            nn.ReLU(),
-            nn.Linear(256, latent_dim),
-        )
-        self.decoder = nn.Sequential(
-            nn.Linear(latent_dim, 256),
-            nn.ReLU(),
-            nn.Linear(256, 512),
-            nn.ReLU(),
-            nn.Linear(512, input_dim),
-        )
+        # Only cascade through hidden sizes strictly larger than latent_dim,
+        # so the encoder shrinks monotonically down to the bottleneck instead
+        # of shrinking then expanding back up when latent_dim >= a hidden size.
+        hidden = [h for h in HIDDEN_SIZES if h > latent_dim]
+
+        enc_dims = [input_dim] + hidden + [latent_dim]
+        enc_layers = []
+        for i in range(len(enc_dims) - 1):
+            enc_layers.append(nn.Linear(enc_dims[i], enc_dims[i + 1]))
+            if i < len(enc_dims) - 2:
+                enc_layers.append(nn.ReLU())
+        self.encoder = nn.Sequential(*enc_layers)
+
+        dec_dims = [latent_dim] + hidden[::-1] + [input_dim]
+        dec_layers = []
+        for i in range(len(dec_dims) - 1):
+            dec_layers.append(nn.Linear(dec_dims[i], dec_dims[i + 1]))
+            if i < len(dec_dims) - 2:
+                dec_layers.append(nn.ReLU())
+        self.decoder = nn.Sequential(*dec_layers)
 
     def forward(self, x):
         z = self.encoder(x)
