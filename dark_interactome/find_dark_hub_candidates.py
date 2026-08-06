@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Project both-dark pairs into MAPPIE's latent space, enrich, roll up into
-candidate dark hub proteins (recurring across >=3 partners; Fig. 6)."""
+candidate dark hub proteins (recurring across >=3 partners; Fig. 5)."""
 import csv
 import os
 import re
