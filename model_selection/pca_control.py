@@ -13,7 +13,7 @@ from scipy.stats import wilcoxon
 from sklearn.decomposition import PCA
 from sklearn.neighbors import NearestNeighbors
 
-sys.path.insert(0, str(Path(os.environ.get("MAPPIE_REPO_ROOT", Path(__file__).resolve().parents[2]))))
+sys.path.insert(0, str(Path(os.environ.get("MAPPIE_REPO_ROOT", Path(__file__).resolve().parents[1]))))
 from core_algorithm.project_ppi import SCALER_FILE, EMBEDDINGS_DB
 
 MAPPIE_ROOT = Path(os.environ.get("MAPPIE_ROOT", "../mappie"))
